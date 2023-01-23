@@ -11,4 +11,4 @@ const responseUser = {
   role: 'administrator'
 }
 
-export default { inputUser, responseUser }
+module.exports = { inputUser, responseUser }
