@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const Sales = sequelize.define('Sale', {
+    const Sale = sequelize.define('Sale', {
         id: {
             autoIncrement: true,
             primaryKey: true,
@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
         totalPrice: DataTypes.FLOAT,
         deliveryAddress: DataTypes.STRING,
         deliveryNumber: DataTypes.STRING,
-        saleDate: DataTypes.DATETIME,
+        saleDate: DataTypes.DATE,
         status: DataTypes.STRING
     }, {
         tableName: 'sales',
@@ -18,14 +18,16 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: false
     })
 
-    Sales.associate = (models) => {
-        Sales.belongsTo(models.User, {
-            as: 'user', foreignKey: 'userId', otherKey: 'sellerId', through: Sales
+    Sale.associate = (models) => {
+        models.Sale.belongsTo(models.User, {
+            as: 'user',
+            foreignKey: 'userId',
         });
-        Sales.hasMany(models.SalesProducts, {
-            as: 'sales_products', foreignKey: 'id'
-        })
+        models.Sale.belongsTo(models.User, {
+            as: 'users',
+            foreignKey: 'sellerId',
+        });
     }
 
-    return Sales;
+    return Sale;
 }
