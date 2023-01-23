@@ -1,7 +1,7 @@
-import {expect} from 'chai';
-import sinon from 'sinon';
-import User from '../../../database/models/User';
-import { inputUser, responseUser } from '../mocks/User';
+const { expect } = require('chai');
+const sinon = require('sinon');
+const { User } = require('../../../database/models');
+const { responseUser, inputUser } = require('../mocks/User');
 
 
 describe('Testando User model >', function () {
@@ -20,8 +20,21 @@ describe('Testando User model >', function () {
     it('Retorna null caso o usuário não exista', async () => {
       sinon.stub(User, 'findOne').resolves(null);
 
-      const user = await User.findOne('emailinvalido@teste.com')
-      expect(user).to.be.equal(null);
+      try {
+        await User.findOne('emailinexistente@com')
+      } catch (error) {
+        expect(error.message).to.be.equal('Not found');
+      }
+    });
+
+    it('Retorna erro 404 caso o usuário insira dados inválidos', async () => {
+      sinon.stub(User, 'findOne').resolves(null);
+
+      try {
+        await User.findOne('emailinvalido@com')
+      } catch (error) {
+        expect(error.message).to.be.equal('Invalid field');
+      }
     })
-  })
+  });
 })
