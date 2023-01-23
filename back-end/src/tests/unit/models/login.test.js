@@ -1,7 +1,8 @@
 const { expect } = require('chai');
+const { describe } = require('pm2');
 const sinon = require('sinon');
 const { User } = require('../../../database/models');
-const { responseUser, inputUser } = require('../mocks/User');
+const { responseUser, inputCreateUser } = require('../mocks/User');
 
 
 describe('Testando User model >', function () {
@@ -9,11 +10,35 @@ describe('Testando User model >', function () {
     sinon.restore();
   });
 
+  describe('create >', () => {
+    // VAI FALHAR COM CTZ
+    it('Retorna um objeto com as informações do usuário corretamente', async () => {
+      sinon.stub(User, 'create').resolves(responseUser);
+
+      const user = await User.create(inputCreateUser);
+      expect(user).to.be.deep.equal(responseUser);
+    });
+
+    it('Não é possível cadastrar um usuário com dados inválidos', async () => {
+      sinon.stub(User, 'create').resolves(null);
+
+      try {        
+        await User.create({
+          name: 'erro',
+          email: 'emailinvalido@co',
+          senha: 123
+        });
+      } catch(error) {
+        expect(error.message).to.be.deep.equal('Invalid field');
+      }
+    })
+  })
+
   describe('findOne >', () => {
     it('Retorna um objeto com as informações do usuário corretamente', async () => {
       sinon.stub(User, 'findOne').resolves(responseUser);
 
-      const user = await User.findOne(inputUser.email)
+      const user = await User.findOne(inputCreateUser.email)
       expect(user).to.be.equal(responseUser);
     });
 
@@ -35,6 +60,6 @@ describe('Testando User model >', function () {
       } catch (error) {
         expect(error.message).to.be.equal('Invalid field');
       }
-    })
+    });
   });
 })
