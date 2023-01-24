@@ -1,6 +1,6 @@
 const Joi = require('joi');
-const jwtUtil = require('../utils/jwt.utils');
 const md5 = require('md5');
+const jwtUtil = require('../utils/jwt.utils');
 
 const { User } = require('../database/models');
 
@@ -12,19 +12,19 @@ const validateBody = (params) => {
 
   const { error, value } = schema.validate(params);
 
-  if(error) return {type: 404, message: 'Not found'};
+  if (error) return { type: 404, message: 'Not found' };
 
   return value;
-}
+};
 
-const login =  async({ email, password}) => {
+const login = async ({ email, password }) => {
   const user = await User.findOne({
-    where: { email }
+    where: { email },
   });
 
   const verificaSenha = md5(password);
 
-  if(!user || user.password !== verificaSenha) {
+  if (!user || user.password !== verificaSenha) {
     return null;
   }
 
@@ -32,6 +32,6 @@ const login =  async({ email, password}) => {
   const token = jwtUtil.createToken(userWithoutPassword);
   
   return token;
-}
+};
 
 module.exports = { validateBody, login };
