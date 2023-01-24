@@ -29,7 +29,7 @@ describe('Testando User model >', function () {
           senha: 123
         });
       } catch(error) {
-        expect(error.message).to.be.deep.equal('Invalid field');
+        expect(error.message).to.be.deep.equal('Not found');
       }
     })
   })
