@@ -3,7 +3,7 @@ import axios from 'axios';
 // const port = process.env.PORT;
 
 const api = axios.create({
-  baseURL: `http://localhost:${process.env.REACT_APP_BACKEND_PORT}`,
+  baseURL: `http://localhost:${process.env.REACT_APP_BACKEND_PORT}` || 'http://localhost:3001',
 //   baseURL: 'http://localhost:3001',
 });
 
