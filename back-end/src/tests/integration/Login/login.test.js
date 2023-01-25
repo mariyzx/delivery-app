@@ -1,15 +1,15 @@
 const sinon = require('sinon');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const app = require('../../api/app');
-const loginService = require('../../services/login.service');
-const { responseUser } = require('../mocks/User');
-const loginController = require('../../controllers/login.controller');
+const app = require('../../../api/app');
+const loginService = require('../../../services/login.service');
+const { responseUser } = require('../../mocks/User');
+const loginController = require('../../../controllers/login.controller');
 
 chai.use(chaiHttp);
 const { expect } = chai;
 
-describe('Login controller >', () => {
+describe('Testes de integração Login controller >', () => {
   afterEach(() => {
     sinon.restore();
   });
@@ -53,6 +53,6 @@ describe('Login controller >', () => {
       
       expect(user.status).to.be.deep.equal(404);
       expect(user.body.message).to.be.deep.equal('Invalid fields');
-    })
+    });
   });
 })
