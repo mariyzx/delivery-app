@@ -25,7 +25,7 @@ function LoginForm() {
 
   const handleLogin = async () => {
     try {
-      const data = await validateLogin(loginData);
+      const data = await validateLogin(loginData.email, loginData.password);
       if (data) history.push('/customer/products');
     } catch (error) {
       setShowError(true);

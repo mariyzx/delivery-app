@@ -1,11 +1,16 @@
 import axios from 'axios';
 
-// const port = process.env.PORT;
+const defaultPort = 3001;
+
+const port = process.env.REACT_APP_BACKEND_PORT || defaultPort;
 
 const api = axios.create({
-  baseURL: `http://localhost:${process.env.REACT_APP_BACKEND_PORT}` || 'http://localhost:3001',
-//   baseURL: 'http://localhost:3001',
+  baseURL: `http://localhost:${port}`,
+  //   baseURL: 'http://localhost:3001',
 });
 
-export const validateLogin = (data) => api.post('/login', data);
+export const validateLogin = async (email, password) => {
+  const result = await api.post('/login', { email, password });
+  return result.data;
+};
 export const validateLgin = (data) => api.post('/login', data);
