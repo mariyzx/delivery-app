@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { validateLogin } from '../services/api';
+import { saveToLocal } from '../services/saveToLocalStorage';
 
 function LoginForm() {
   const [disabled, setDisabled] = useState(true);
@@ -23,10 +24,23 @@ function LoginForm() {
     setLoginData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const getRole = (data) => {
+    const { role } = data;
+    saveToLocal('user', data);
+    if (role === 'seller') {
+      history.push('/seller/orders');
+    }
+    if (role === 'administrator') {
+      history.push('/admin/manage');
+    }
+    history.push('/customer/products');
+  };
+
   const handleLogin = async () => {
     try {
       const data = await validateLogin(loginData.email, loginData.password);
-      if (data) history.push('/customer/products');
+      if (data) getRole(data);
+      setShowError(false);
     } catch (error) {
       setShowError(true);
     }
