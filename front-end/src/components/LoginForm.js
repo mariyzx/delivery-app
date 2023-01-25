@@ -30,7 +30,6 @@ function LoginForm() {
     } catch (error) {
       setShowError(true);
     }
-    validateLogin(loginData).then((response) => console.log(response));
   };
 
   return (
