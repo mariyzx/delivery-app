@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'userId',
         });
         models.Sale.belongsTo(models.User, {
-            as: 'users',
+            as: 'seller',
             foreignKey: 'sellerId',
         });
     }
