@@ -9,8 +9,7 @@ function Card({ products }) {
 
   useEffect(() => {
     checkoutSome({ ...products, some });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [some]);
+  }, [checkoutSome, products, some]);
 
   const addItem = () => setSome(some + 1);
 
