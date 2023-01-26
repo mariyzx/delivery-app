@@ -1,11 +1,27 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { registerNewUser } from '../services/api';
 
 function RegisterForm() {
   const [disabled, setDisabled] = useState(true);
   const [registerData, setRegisterData] = useState({ name: '', email: '', password: '' });
+  const [showError, setShowError] = useState(false);
+  const history = useHistory();
 
   const handleChange = ({ target: { name, value } }) => {
     setRegisterData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleRegister = async () => {
+    try {
+      const { name, email, password } = registerData;
+      const data = await registerNewUser(name, email, password);
+      if (data) {
+        history.push('/customer/products');
+      }
+    } catch (error) {
+      setShowError(true);
+    }
   };
 
   useEffect(() => {
@@ -63,15 +79,18 @@ function RegisterForm() {
           type="button"
           data-testid="common_register__button-register"
           disabled={ disabled }
+          onClick={ handleRegister }
         >
           CADASTRAR
         </button>
 
-        {/* <span
-          data-testid="common_register__element-invalid_register"
-        >
-          Elemento oculto(Mensagens de erro)
-        </span> */}
+        {showError && (
+          <span
+            data-testid="common_register__element-invalid_register"
+          >
+            Elemento oculto(Mensagens de erro)
+          </span>
+        )}
       </form>
     </div>
   );

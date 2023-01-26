@@ -9,7 +9,7 @@ const login = async (req, res) => {
 
   if (token === null) return res.status(404).json({ message: 'Not found' });
 
-  return res.status(200).json({ token });
+  return res.status(200).json(token);
 };
 
 module.exports = {

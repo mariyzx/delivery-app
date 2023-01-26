@@ -11,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
         role: DataTypes.STRING
     }, {
         tableName: 'users',
-        timestamps: false
+        underscored: true,
+        timestamps: false,
     })
 
     User.associate = (models) => {
