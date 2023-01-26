@@ -12,7 +12,7 @@ const validateBody = (params) => {
 
   const { error, value } = schema.validate(params);
 
-  if (error) return { type: 404, message: 'Not found' };
+  if (error) return { type: 400, message: 'Invalid fields' };
 
   return value;
 };
@@ -29,9 +29,12 @@ const login = async ({ email, password }) => {
   }
 
   const { password: _, ...userWithoutPassword } = user.dataValues;
+
   const token = jwtUtil.createToken(userWithoutPassword);
+
+  const { role, name } = userWithoutPassword;
   
-  return token;
+  return ({ email, name, role, token });
 };
 
 module.exports = { validateBody, login };
