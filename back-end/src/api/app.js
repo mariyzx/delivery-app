@@ -5,8 +5,8 @@ const routers = require('../routers/register.router');
 
 const app = express();
 app.use(cors());
-app.use(express.json());
 
+app.use(express.json());
 app.use('/login', loginRoutes);
 app.use('/register', routers);
 
