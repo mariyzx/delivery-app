@@ -16,7 +16,7 @@ module.exports = {
       },
       price: {
         allowNull: false,
-        type: Sequelize.FLOAT
+        type: Sequelize.DECIMAL(4,2) // troca Float por Decimal(4,2)
       },
       url_image: {
         allowNull: false,
