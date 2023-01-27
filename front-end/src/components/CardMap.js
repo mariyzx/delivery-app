@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import Card from './Cards';
+import { getAllProducts } from '../services/api';
 // import { fechProduct } from '../api/featch';
 
 function CardMap() {
   const [listProduct, setListProduct] = useState([]);
 
   useEffect(() => {
-    const getProduct = () => {
-      // const products = await fechProduct();
-      const products = {
-        data: [],
-      };
-      setListProduct(products.data);
+    const getProduct = async () => {
+      const products = await getAllProducts();
+      setListProduct(products);
     };
     getProduct();
   }, []);

@@ -17,3 +17,8 @@ export const registerNewUser = async (name, email, password) => {
   const result = await api.post('/register', { name, email, password });
   return result.data;
 };
+
+export const getAllProducts = async () => {
+  const result = await api.get('/customer/products');
+  return result.data;
+};

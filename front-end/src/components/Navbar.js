@@ -8,7 +8,8 @@ function Navbar() {
 
   useEffect(() => {
     // fechUser(setUser);
-    setUser({ name: 'Usúario Teste' });
+    const getUser = JSON.parse(localStorage.getItem('user'));
+    setUser({ name: getUser.name });
   }, []);
 
   return (
