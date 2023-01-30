@@ -18,7 +18,11 @@ export const registerNewUser = async (name, email, password) => {
   return result.data;
 };
 
-export const getAllProducts = async () => {
-  const result = await api.get('/customer/products');
+export const getAllProducts = async (token) => {
+  const apiAuth = axios.create({
+    baseURL: `http://localhost:${port}`,
+    headers: { authorization: token }, // adiciona token para o backend
+  });
+  const result = await apiAuth.get('/customer/products');
   return result.data;
 };
