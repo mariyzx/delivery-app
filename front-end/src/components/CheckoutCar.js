@@ -1,15 +1,16 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ProvideContext from '../context/ProvideContext';
 
 function CheckoutCar() {
   const { products } = useContext(ProvideContext);
-  // const [amount, setAmount] = useState([]);
+  const [productsList, setProductsList] = useState(products);
 
-  // const removeItem = () => {
+  const removeItem = (item) => {
+    const newproducts = productsList.filter((product) => product.name !== item);
+    setProductsList(newproducts);
+  };
 
-  // }
-
-  const calculateProducts = () => products.reduce((acc, product) => {
+  const calculateProducts = () => productsList.reduce((acc, product) => {
     acc += (product.some * Number(product.price));
     return acc;
   }, 0).toFixed(2).replace('.', ',');
@@ -26,8 +27,8 @@ function CheckoutCar() {
   return (
     <div>
       <h1>Finalizar Pedido</h1>
-      {products.map((product) => console.log(product))}
-      {products.length === 0 ? <p>Nenhum pedido cadastrado</p> : (
+      {productsList.map((product) => console.log(product))}
+      {productsList.length === 0 ? <p>Nenhum pedido cadastrado</p> : (
         <table>
           <thead>
             <tr>
@@ -40,7 +41,7 @@ function CheckoutCar() {
             </tr>
           </thead>
           <tbody>
-            {products.map((product, index) => (
+            {productsList.map((product, index) => (
               <tr key={ index }>
                 <td
                   data-testid={ dataTest('item-number', index) }
@@ -70,7 +71,12 @@ function CheckoutCar() {
                 <td
                   data-testid={ dataTest('remove', index) }
                 >
-                  <button type="button">Remover</button>
+                  <button
+                    onClick={ () => removeItem(product.name) }
+                    type="button"
+                  >
+                    Remover
+                  </button>
                 </td>
               </tr>
             ))}
@@ -107,6 +113,7 @@ function CheckoutCar() {
       <button
         type="button"
         data-testid="customer_checkout__button-submit-order"
+        onClick={ sendNewSale }
       >
         Finalizar Pedido
       </button>
