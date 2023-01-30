@@ -14,8 +14,9 @@ function CardMap() {
   console.log(activate);
 
   useEffect(() => {
+    const { token } = JSON.parse(localStorage.getItem('user')); // pega token localstorage
     const getProduct = async () => {
-      const result = await getAllProducts();
+      const result = await getAllProducts(token); // adiciona token para o backend
       setListProduct(result);
     };
     getProduct();
