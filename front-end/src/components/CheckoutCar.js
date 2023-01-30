@@ -113,7 +113,7 @@ function CheckoutCar() {
       <button
         type="button"
         data-testid="customer_checkout__button-submit-order"
-        onClick={ sendNewSale }
+        // onClick={ sendNewSale }
       >
         Finalizar Pedido
       </button>
