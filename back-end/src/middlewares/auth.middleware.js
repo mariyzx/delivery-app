@@ -1,13 +1,16 @@
 const jwt = require('jsonwebtoken');
 require('dotenv/config');
+const { readFileSync } = require('fs');
+
+const secret = readFileSync('jwt.evaluation.key', 'utf-8');
 
 const authMiddleware = async (req, res, next) => {
   try {
     const { authorization: token } = req.headers;
 
-    if (!token) return res.status(401).json({ message: 'Token Not Found' });
+    if (!token || !secret) return res.status(401).json({ message: 'Token Not Found' });
 
-      const decoded = jwt.verify(token, process.env.JWT_SECRET || 'secret_key');
+      const decoded = jwt.verify(token, secret);
 
       req.body.user = decoded;
 

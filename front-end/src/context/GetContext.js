@@ -2,7 +2,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import ProvideContext from './ProvideContext';
 
-function ProviderContext({ children }) {
+function GetContext({ children }) {
   const [products, setProducts] = useState([]);
 
   const { Provider } = ProvideContext;
@@ -33,8 +33,8 @@ function ProviderContext({ children }) {
   );
 }
 
-ProviderContext.propTypes = {
+GetContext.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default ProviderContext;
+export default GetContext;
