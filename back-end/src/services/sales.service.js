@@ -20,7 +20,7 @@ const createSale = async (body) => {
       productId: sale.productId,
       quantity: sale.quantity,
     });
-  })
+  });
   // ** Dados mockado // Falta o front
   //  await SaleProduct.create({
   //   saleId: newSale.id,
