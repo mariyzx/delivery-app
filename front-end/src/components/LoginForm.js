@@ -32,8 +32,9 @@ function LoginForm() {
     }
     if (role === 'administrator') {
       history.push('/admin/manage');
+    } else { // + adiciona else
+      history.push('/customer/products');
     }
-    history.push('/customer/products');
   };
 
   const handleLogin = async () => {

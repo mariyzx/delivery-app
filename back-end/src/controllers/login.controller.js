@@ -6,7 +6,7 @@ const login = async (req, res) => {
   if (message) return res.status(400).json({ message });
 
   const token = await loginService.login({ email, password });
-  console.log(token)
+  console.log(token);
 
   if (token === null) return res.status(404).json({ message: 'Not found' });
 
