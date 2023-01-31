@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { validateLogin } from '../services/api';
 import { saveToLocal } from '../services/saveToLocalStorage';
+import FormDiv from '../styles/components/LoginForm';
 
 function LoginForm() {
   const [disabled, setDisabled] = useState(true);
@@ -48,7 +49,7 @@ function LoginForm() {
   };
 
   return (
-    <form>
+    <FormDiv>
       <label htmlFor="email-input">
         <span>Login</span>
         <input
@@ -99,7 +100,7 @@ function LoginForm() {
           Elemento oculto(Mensagens de erro)
         </span>
       )}
-    </form>
+    </FormDiv>
   );
 }
 
