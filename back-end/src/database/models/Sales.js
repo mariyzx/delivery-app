@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         userId: DataTypes.INTEGER,
         sellerId: DataTypes.INTEGER,
-        totalPrice: DataTypes.FLOAT,
+        totalPrice: DataTypes.STRING, // estava como float
         deliveryAddress: DataTypes.STRING,
         deliveryNumber: DataTypes.STRING,
         saleDate: DataTypes.DATE,

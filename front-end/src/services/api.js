@@ -27,19 +27,15 @@ export const getAllProducts = async (token) => {
   return result.data;
 };
 
-export const createNewSale = async (data) => {
-  const { userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, token } = data;
+export const createNewSale = async (dataToSales, dataToSalesProduct, token) => {
+  const newData = { dataToSales, dataToSalesProduct };
   const apiSale = axios.create({
     baseURL: `http://localhost:${port}`,
     headers: { authorization: token }, // adiciona token para o backend
   });
   const result = await apiSale.post(
     '/customer/orders',
-    { userId, sellerId, totalPrice, deliveryAddress, deliveryNumber },
+    { newData },
   );
   return result.data;
 };
-
-// export const addToSalesProducts = async (data) => {
-//   const { productId, quantity } = data;
-// }

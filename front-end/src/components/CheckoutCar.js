@@ -4,10 +4,11 @@ import ProvideContext from '../context/ProvideContext';
 import { createNewSale } from '../services/api';
 
 function CheckoutCar() {
-  const { products } = useContext(ProvideContext);
+  const { products, setProducts } = useContext(ProvideContext);
   const [productsList, setProductsList] = useState(products);
   const [address, setAddress] = useState('');
   const [number, setNumber] = useState('');
+  const arrToSalesProducts = [];
   const history = useHistory();
 
   const removeItem = (item) => {
@@ -22,15 +23,24 @@ function CheckoutCar() {
 
   const sendNewSale = async () => {
     const { id, token } = JSON.parse(localStorage.getItem('user'));
+    productsList.forEach((product) => {
+      const productToAdd = {
+        productId: product.id,
+        quantity: product.some,
+        token,
+      };
+      arrToSalesProducts.push(productToAdd);
+      return arrToSalesProducts;
+    });
     const obj = {
       userId: id,
       sellerId: 2,
       totalPrice: calculateProducts().replace(',', '.'),
       deliveryAddress: address,
       deliveryNumber: number,
-      token,
     };
-    const data = await createNewSale(obj);
+    const data = await createNewSale(obj, arrToSalesProducts, token);
+    setProducts(productsList);
     history.push(`/customer/orders/${data.id}`);
   };
 
@@ -46,7 +56,6 @@ function CheckoutCar() {
   return (
     <div>
       <h1>Finalizar Pedido</h1>
-      {productsList.map((product) => console.log(product))}
       {productsList.length === 0 ? <p>Nenhum pedido cadastrado</p> : (
         <table>
           <thead>

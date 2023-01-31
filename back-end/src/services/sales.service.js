@@ -1,23 +1,32 @@
-const { Sale, SaleProduct, User } = require('../database/models');
+const { Sale, SalesProducts, User } = require('../database/models');
 
-const test = {
-  productId: 9,
-  quantity: 1,
-};
+// const test = {
+//   productId: 9,
+//   quantity: 1,
+// };
 
 const createSale = async (body) => {
+  const { newData: { dataToSales, dataToSalesProduct } } = body;
+
   const newSale = await Sale.create({ 
-    ...body,
+    ...dataToSales,
     saleDate: Date(),
     status: 'Pendente',
   });
 
+  dataToSalesProduct.forEach(async (sale) => {
+    await SalesProducts.create({
+      saleId: newSale.id,
+      productId: sale.productId,
+      quantity: sale.quantity,
+    });
+  })
   // ** Dados mockado // Falta o front
-   await SaleProduct.create({
-    saleId: newSale.id,
-    productId: test.productId,
-    quantity: test.quantity,
-  });
+  //  await SaleProduct.create({
+  //   saleId: newSale.id,
+  //   productId: dataToSalesProduct.productId,
+  //   quantity: dataToSalesProduct.quantity,
+  // });
 
   return newSale;
 };

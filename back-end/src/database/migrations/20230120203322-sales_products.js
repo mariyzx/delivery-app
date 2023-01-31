@@ -2,10 +2,10 @@
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('salesProducts', {
+    await queryInterface.createTable('sales_products', { // corrige nome tabela
       sale_id: {
         allowNull: false,
-        autoIncrement: true,
+        // autoIncrement: true, // remove autoincrement
         primaryKey: true,
         type: Sequelize.INTEGER,
         onUpdate: 'CASCADE',
@@ -17,6 +17,7 @@ module.exports = {
       },
       product_id: {
         allowNull: false,
+        primaryKey: true, // adiciona 
         type: Sequelize.INTEGER,
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
@@ -29,10 +30,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER
       },
-    })
+    }, { underscored: true, tableName: 'sales_products' }) // adiciona underscored e corrige name
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('salesProducts');
+    await queryInterface.dropTable('sales_products'); // corrige name
   }
 };

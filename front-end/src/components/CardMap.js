@@ -11,7 +11,7 @@ function CardMap() {
   const { products } = useContext(ProvideContext);
   const redirection = useHistory();
 
-  console.log(activate);
+  // console.log(activate);
 
   useEffect(() => {
     const { token } = JSON.parse(localStorage.getItem('user')); // pega token localstorage
