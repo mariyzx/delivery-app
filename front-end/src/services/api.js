@@ -26,3 +26,26 @@ export const getAllProducts = async (token) => {
   const result = await apiAuth.get('/customer/products');
   return result.data;
 };
+
+export const createNewSale = async (dataToSales, dataToSalesProduct, token) => {
+  const newData = { dataToSales, dataToSalesProduct };
+  const apiSale = axios.create({
+    baseURL: `http://localhost:${port}`,
+    headers: { authorization: token }, // adiciona token para o backend
+  });
+  const result = await apiSale.post(
+    '/customer/orders',
+    { newData },
+  );
+  return result.data;
+};
+
+export const newUser = async (adminData, token) => {
+  const { name, email, password, role } = adminData;
+  const apiAdmin = axios.create({
+    baseURL: `http://localhost:${port}`,
+    headers: { authorization: token }, // adiciona token para o backend
+  });
+  const result = await apiAdmin.post('/admin/manage', { name, email, password, role });
+  return result.data;
+};

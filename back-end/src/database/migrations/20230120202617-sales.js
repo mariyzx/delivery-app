@@ -49,7 +49,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       }
-    })
+    }, { underscored: true }) // adiciona underscored true
   },
 
   async down (queryInterface, Sequelize) {

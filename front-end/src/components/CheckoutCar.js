@@ -1,0 +1,154 @@
+import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import ProvideContext from '../context/ProvideContext';
+import { createNewSale } from '../services/api';
+
+function CheckoutCar() {
+  const { products, setProducts } = useContext(ProvideContext); //
+  const [productsList, setProductsList] = useState(products);
+  const [address, setAddress] = useState('');
+  const [number, setNumber] = useState('');
+  const arrToSalesProducts = [];
+  const history = useHistory();
+
+  const removeItem = (item) => {
+    const newproducts = productsList.filter((product) => product.name !== item);
+    setProductsList(newproducts);
+  };
+
+  const calculateProducts = () => productsList.reduce((acc, product) => {
+    acc += (product.some * Number(product.price));
+    return acc;
+  }, 0).toFixed(2).replace('.', ',');
+
+  const sendNewSale = async () => {
+    const { id, token } = JSON.parse(localStorage.getItem('user'));
+    productsList.forEach((product) => {
+      const productToAdd = {
+        productId: product.id,
+        quantity: product.some,
+        token,
+      };
+      arrToSalesProducts.push(productToAdd);
+      return arrToSalesProducts;
+    });
+    const obj = {
+      userId: id,
+      sellerId: 2,
+      totalPrice: calculateProducts().replace(',', '.'),
+      deliveryAddress: address,
+      deliveryNumber: number,
+    };
+    const data = await createNewSale(obj, arrToSalesProducts, token);
+    setProducts(productsList);
+    history.push(`/customer/orders/${data.id}`);
+  };
+
+  useEffect(() => {
+    calculateProducts();
+  });
+
+  const dataTest = (name, index) => {
+    const data = `customer_checkout__element-order-table-${name}-${index}`;
+    return data;
+  };
+
+  return (
+    <div>
+      <h1>Finalizar Pedido</h1>
+      {productsList.length === 0 ? <p>Nenhum pedido cadastrado</p> : (
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Descrição</th>
+              <th>Quantidade</th>
+              <th>Valor Unitário</th>
+              <th>Sub-total</th>
+              <th>Remover Item</th>
+            </tr>
+          </thead>
+          <tbody>
+            {productsList.map((product, index) => (
+              <tr key={ index }>
+                <td
+                  data-testid={ dataTest('item-number', index) }
+                >
+                  {Number(index + 1)}
+                </td>
+                <td
+                  data-testid={ dataTest('name', index) }
+                >
+                  {product.name}
+                </td>
+                <td
+                  data-testid={ dataTest('quantity', index) }
+                >
+                  {product.some}
+                </td>
+                <td
+                  data-testid={ dataTest('unit-price', index) }
+                >
+                  {(product.price).replace('.', ',')}
+                </td>
+                <td
+                  data-testid={ dataTest('sub-total', index) }
+                >
+                  {(product.price * product.some).toFixed(2).replace('.', ',')}
+                </td>
+                <td
+                  data-testid={ dataTest('remove', index) }
+                >
+                  <button
+                    onClick={ () => removeItem(product.name) }
+                    type="button"
+                  >
+                    Remover
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+      <p
+        data-testid="customer_checkout__element-order-total-price"
+      >
+        Total:
+        {' '}
+        {calculateProducts()}
+      </p>
+      <h1>Detalhes e endereço para Entrega</h1>
+
+      <span>P. Vendedora Responsavel</span>
+      <select
+        data-testid="customer_checkout__select-seller"
+      >
+        <option>Pessoa Vendedora 1</option>
+        <option>Pessoa Vendedora 2</option>
+      </select>
+
+      <span>Endereço</span>
+      <input
+        data-testid="customer_checkout__input-address"
+        onChange={ ({ target: { value } }) => setAddress(value) }
+      />
+
+      <span>Numero</span>
+      <input
+        data-testid="customer_checkout__input-address-number"
+        onChange={ ({ target: { value } }) => setNumber(value) }
+      />
+
+      <button
+        type="button"
+        data-testid="customer_checkout__button-submit-order"
+        onClick={ sendNewSale }
+      >
+        Finalizar Pedido
+      </button>
+    </div>
+  );
+}
+
+export default CheckoutCar;
