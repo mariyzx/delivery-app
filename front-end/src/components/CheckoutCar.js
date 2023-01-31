@@ -4,7 +4,7 @@ import ProvideContext from '../context/ProvideContext';
 import { createNewSale } from '../services/api';
 
 function CheckoutCar() {
-  const { products, setProducts } = useContext(ProvideContext);
+  const { products, setProducts } = useContext(ProvideContext); //
   const [productsList, setProductsList] = useState(products);
   const [address, setAddress] = useState('');
   const [number, setNumber] = useState('');
