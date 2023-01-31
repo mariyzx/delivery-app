@@ -13,7 +13,7 @@ app.use(express.static('public')); // necessario para renderizar as imagens de p
 
 app.use('/login', loginRoutes);
 app.use('/customer/products', productsRoutes);
-app.use('/sales', salesRoutes);
+app.use('/customer/orders', salesRoutes); // altera rota, estava /sales
 app.use('/register', routers);
 
 module.exports = app;

@@ -1,9 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import ProvideContext from '../context/ProvideContext';
+import { createNewSale } from '../services/api';
 
 function CheckoutCar() {
   const { products } = useContext(ProvideContext);
   const [productsList, setProductsList] = useState(products);
+  const [address, setAddress] = useState('');
+  const [number, setNumber] = useState('');
+  const history = useHistory();
 
   const removeItem = (item) => {
     const newproducts = productsList.filter((product) => product.name !== item);
@@ -14,6 +19,20 @@ function CheckoutCar() {
     acc += (product.some * Number(product.price));
     return acc;
   }, 0).toFixed(2).replace('.', ',');
+
+  const sendNewSale = async () => {
+    const { id, token } = JSON.parse(localStorage.getItem('user'));
+    const obj = {
+      userId: id,
+      sellerId: 2,
+      totalPrice: calculateProducts().replace(',', '.'),
+      deliveryAddress: address,
+      deliveryNumber: number,
+      token,
+    };
+    const data = await createNewSale(obj);
+    history.push(`/customer/orders/${data.id}`);
+  };
 
   useEffect(() => {
     calculateProducts();
@@ -103,17 +122,19 @@ function CheckoutCar() {
       <span>Endereço</span>
       <input
         data-testid="customer_checkout__input-address"
+        onChange={ ({ target: { value } }) => setAddress(value) }
       />
 
       <span>Numero</span>
       <input
         data-testid="customer_checkout__input-address-number"
+        onChange={ ({ target: { value } }) => setNumber(value) }
       />
 
       <button
         type="button"
         data-testid="customer_checkout__button-submit-order"
-        // onClick={ sendNewSale }
+        onClick={ sendNewSale }
       >
         Finalizar Pedido
       </button>
