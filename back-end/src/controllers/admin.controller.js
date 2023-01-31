@@ -5,11 +5,12 @@ const registerAdmin = async (req, res) => {
     const { authorization } = req.headers;
 
     if (authorization) {
-        const { status, message } = await adminService.createUserAdmin({ name, email, password, role });
+        const { status, message } = await adminService
+            .createUserAdmin({ name, email, password, role });
         if (status) return res.status(status).json({ message });
-        return res.status(201).json( message );
+        return res.status(201).json(message);
     } 
-    return res.status(409).json('Not is admin')
+    return res.status(409).json('Not is admin');
 };
 
 module.exports = {
