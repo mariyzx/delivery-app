@@ -30,7 +30,7 @@ function AdminForm() {
     } catch (error) {
       setShowError(true);
     }
-    setAdminData({ name: '', email: '', password: '', role: 'Vendedor' });
+    setAdminData({ name: '', email: '', password: '', role: 'seller' });
   };
 
   return (
