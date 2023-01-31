@@ -4,10 +4,10 @@ import CardMap from '../components/CardMap';
 
 function Products() {
   return (
-    <>
+    <div>
       <Navbar />
       <CardMap />
-    </>
+    </div>
   );
 }
 
