@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { newUser } from '../services/api';
 
 function AdminForm() {
   const [disabled, setDisabled] = useState(true);
   const [adminData, setAdminData] = useState(
-    { name: '', email: '', password: '', role: '' },
+    { name: '', email: '', password: '', role: 'seller' },
   );
+  const [showError, setShowError] = useState(false);
 
   useEffect(() => {
     const minPass = 6;
@@ -13,11 +15,22 @@ function AdminForm() {
     const validPassword = adminData.password.length >= minPass;
     const validName = adminData.name.length >= minName;
     const validRole = adminData.role.length === 0;
-    setDisabled(!(validEmail && validPassword && validName && validRole));
+    setDisabled(!(validEmail && validPassword && validName && !validRole));
   }, [adminData]);
 
   const handleChange = ({ target: { name, value } }) => {
     setAdminData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleRegister = async () => {
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    try {
+      await newUser(adminData, token);
+      setShowError(false);
+    } catch (error) {
+      setShowError(true);
+    }
+    setAdminData({ name: '', email: '', password: '', role: 'Vendedor' });
   };
 
   return (
@@ -71,9 +84,9 @@ function AdminForm() {
             onChange={ handleChange }
             value={ adminData.role }
           >
-            <option>Vendedor</option>
-            <option>Administrador</option>
-            <option>Cliente</option>
+            <option>seller</option>
+            <option>administrator</option>
+            <option>customer</option>
           </select>
 
         </label>
@@ -82,11 +95,18 @@ function AdminForm() {
           type="button"
           data-testid="admin_manage__button-register"
           disabled={ disabled }
-          // onClick={handleRegister}
+          onClick={ handleRegister }
         >
           CADASTRAR
         </button>
       </form>
+      { showError && (
+        <span
+          data-testid="admin_manage__element-invalid-register"
+        >
+          Elemento oculto(Mensagens de erro)
+        </span>
+      )}
     </div>
   );
 }
