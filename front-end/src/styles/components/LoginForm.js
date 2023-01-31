@@ -18,8 +18,9 @@ const FormDiv = styled.form`
     border-bottom-color: #777;
     outline: none;
     background-color: transparent;
-    color: #0d0c22;
+    color: white;
     transition: .3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    padding-left: 4px;
   }
 
   label > input:focus, label > input:hover {
@@ -47,6 +48,8 @@ const FormDiv = styled.form`
     font-weight: 30px;
     color: white;
     border-radius: 4px;
+    cursor: pointer;
+    margin-top: 5px;
   }
 
   button:hover {
@@ -56,6 +59,11 @@ const FormDiv = styled.form`
 
   button:active {
     transform: translate(0em, 0.2em);
+  }
+
+  button:disabled {
+    opacity: 0.65; 
+    pointer-events: none;
   }
 
 `;
