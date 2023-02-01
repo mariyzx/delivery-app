@@ -18,7 +18,6 @@ const FormDiv = styled.form`
     border-bottom-color: #777;
     outline: none;
     background-color: transparent;
-    color: white;
     transition: .3s cubic-bezier(0.645, 0.045, 0.355, 1);
     padding-left: 4px;
   }
@@ -62,7 +61,7 @@ const FormDiv = styled.form`
   }
 
   button:disabled {
-    opacity: 0.65; 
+    opacity: 0.70; 
     pointer-events: none;
   }
 

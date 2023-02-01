@@ -19,8 +19,8 @@ const GlobalStyle = createGlobalStyle`
     min-height: 100vh;
     min-width: 100%;
     overflow: hidden;
-    font-family: 'Poppins', sans-serif;
-    background-color: #fafafa
+    font-family: 'Roboto', sans-serif;
+    background-color: #fafafa;
 }
 `;
 
