@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import ProvideContext from '../context/ProvideContext';
 import { createNewSale } from '../services/api';
+import TableCheckout from '../styles/components/Table';
+import { MainCheckout, Total } from '../styles/pages/Checkout';
 
 function CheckoutCar() {
   const { products, setProducts } = useContext(ProvideContext); //
@@ -54,10 +56,10 @@ function CheckoutCar() {
   };
 
   return (
-    <div>
+    <MainCheckout>
       <h1>Finalizar Pedido</h1>
       {productsList.length === 0 ? <p>Nenhum pedido cadastrado</p> : (
-        <table>
+        <TableCheckout>
           <thead>
             <tr>
               <th>Item</th>
@@ -102,6 +104,7 @@ function CheckoutCar() {
                   <button
                     onClick={ () => removeItem(product.name) }
                     type="button"
+                    className="removeButton"
                   >
                     Remover
                   </button>
@@ -109,15 +112,15 @@ function CheckoutCar() {
               </tr>
             ))}
           </tbody>
-        </table>
+        </TableCheckout>
       )}
-      <p
+      <Total
         data-testid="customer_checkout__element-order-total-price"
       >
         Total:
         {' '}
         {calculateProducts()}
-      </p>
+      </Total>
       <h1>Detalhes e endereço para Entrega</h1>
 
       <span>P. Vendedora Responsavel</span>
@@ -147,7 +150,7 @@ function CheckoutCar() {
       >
         Finalizar Pedido
       </button>
-    </div>
+    </MainCheckout>
   );
 }
 
