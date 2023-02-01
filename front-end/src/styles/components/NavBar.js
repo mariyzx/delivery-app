@@ -69,13 +69,17 @@ export const Menu = styled.div`
   @media (max-width: 550px) {
     position: fixed;
     left: -100%;
-    top: 70px;
+    top: 80px;
     gap: 0;
     flex-direction: column;
     background-color: #F9B717;
     width: 100%;
     text-align: center;
     transition: 0.3s;
+
+    h3 {
+      margin: 0.3rem;
+    }
   }
  
 `;
