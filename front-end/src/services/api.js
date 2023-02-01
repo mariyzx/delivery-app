@@ -47,6 +47,8 @@ export const newUser = async (adminData, token) => {
     headers: { authorization: token }, // adiciona token para o backend
   });
   const result = await apiAdmin.post('/admin/manage', { name, email, password, role });
+  return result.data;
+};
 
 export const getAllOrders = async (token) => {
   const apiAuth = axios.create({
