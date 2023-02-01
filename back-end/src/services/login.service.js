@@ -32,9 +32,9 @@ const login = async ({ email, password }) => {
 
   const token = jwtUtil.createToken(userWithoutPassword);
 
-  const { role, name } = userWithoutPassword;
+  const { role, name, id } = userWithoutPassword;
   
-  return ({ email, name, role, token });
+  return ({ id, email, name, role, token });
 };
 
 module.exports = { validateBody, login };

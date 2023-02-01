@@ -24,6 +24,8 @@ const options = {
   logging: false,
 };
 
+console.log(process.env.MYSQL_HOST)
+
 module.exports = {
   development: {
     ...options,
