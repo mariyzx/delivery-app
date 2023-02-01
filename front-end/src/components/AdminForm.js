@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { newUser } from '../services/api';
 import { MainAdmin, FormAdmin } from '../styles/components/AdminForm';
 
@@ -8,6 +9,7 @@ function AdminForm() {
     { name: '', email: '', password: '', role: 'seller' },
   );
   const [showError, setShowError] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     const minPass = 6;
@@ -99,6 +101,12 @@ function AdminForm() {
           onClick={ handleRegister }
         >
           CADASTRAR
+        </button>
+        <button
+          type="button"
+          onClick={ () => history.goBack() }
+        >
+          VOLTAR
         </button>
       </FormAdmin>
       { showError && (
