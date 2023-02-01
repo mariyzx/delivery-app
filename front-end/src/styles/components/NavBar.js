@@ -77,5 +77,5 @@ export const Menu = styled.div`
     text-align: center;
     transition: 0.3s;
   }
-
+ 
 `;
