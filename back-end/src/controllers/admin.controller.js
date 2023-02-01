@@ -19,7 +19,7 @@ const registerAdmin = async (req, res) => {
   //         return res.status(201).json(message);
   //     }
   // } 
-  // return res.status(409).json('Not an admin');
+  // return res.status(409).json('Not an admin'); //
   
   try {
     const decoded = jwt.verify(authorization, secret);
