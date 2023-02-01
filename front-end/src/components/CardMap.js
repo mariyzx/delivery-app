@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { BsCartFill } from 'react-icons/bs';
 import Card from './Cards';
 import { getAllProducts } from '../services/api';
 import ProvideContext from '../context/ProvideContext';
+import { DivProducts, Cart, ListProducts } from '../styles/pages/Products';
 
 function CardMap() {
   const [listProduct, setListProduct] = useState([]);
@@ -35,9 +37,9 @@ function CardMap() {
   }, [products]);
 
   return (
-    <div>
+    <DivProducts>
       <h1>Products</h1>
-      <div>
+      <ListProducts>
         {
           listProduct.map((product, i) => (
             <div key={ i }>
@@ -45,15 +47,17 @@ function CardMap() {
             </div>
           ))
         }
-      </div>
-      <div>
+      </ListProducts>
+      <Cart>
         <button
           data-testid="customer_products__button-cart"
           type="submit"
           disabled={ activate }
           onClick={ () => redirection.push('/customer/checkout') }
         >
-          Ver carrinho: R$
+          <BsCartFill />
+          {' '}
+          R$
           {' '}
           <span
             data-testid="customer_products__checkout-bottom-value"
@@ -61,8 +65,8 @@ function CardMap() {
             { `${amount.toString().replace('.', ',')}` }
           </span>
         </button>
-      </div>
-    </div>
+      </Cart>
+    </DivProducts>
   );
 }
 

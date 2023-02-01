@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState, useContext } from 'react';
 import ProvideContext from '../context/ProvideContext';
+import { CardDiv, DivButton } from '../styles/components/Cards';
 
 function Card({ products }) {
   const [some, setSome] = useState(0);
@@ -33,7 +34,7 @@ function Card({ products }) {
   };
 
   return (
-    <div className="card-product">
+    <CardDiv className="card-product">
       <p
         data-testid={ `customer_products__element-card-title-${id}` }
       >
@@ -50,28 +51,30 @@ function Card({ products }) {
       >
         { `R$ ${price.toString().replace('.', ',')}` }
       </p>
-      <button
-        data-testid={ `customer_products__button-card-add-item-${id}` }
-        type="submit"
-        onClick={ addItem }
-      >
-        +
-      </button>
-      <input
-        data-testid={ `customer_products__input-card-quantity-${id}` }
-        type="number"
-        onChange={ handleChange }
-        min={ 0 }
-        value={ Number(some) }
-      />
-      <button
-        data-testid={ `customer_products__button-card-rm-item-${id}` }
-        type="submit"
-        onClick={ removeItem }
-      >
-        -
-      </button>
-    </div>
+      <DivButton>
+        <button
+          data-testid={ `customer_products__button-card-add-item-${id}` }
+          type="submit"
+          onClick={ addItem }
+        >
+          +
+        </button>
+        <input
+          data-testid={ `customer_products__input-card-quantity-${id}` }
+          type="number"
+          onChange={ handleChange }
+          min={ 0 }
+          value={ Number(some) }
+        />
+        <button
+          data-testid={ `customer_products__button-card-rm-item-${id}` }
+          type="submit"
+          onClick={ removeItem }
+        >
+          -
+        </button>
+      </DivButton>
+    </CardDiv>
   );
 }
 

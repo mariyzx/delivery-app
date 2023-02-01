@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { validateLogin } from '../services/api';
 import { saveToLocal } from '../services/saveToLocalStorage';
+import FormDiv from '../styles/components/LoginForm';
 
 function LoginForm() {
   const [disabled, setDisabled] = useState(true);
@@ -48,7 +49,7 @@ function LoginForm() {
   };
 
   return (
-    <form>
+    <FormDiv>
       <label htmlFor="email-input">
         <span>Login</span>
         <input
@@ -95,11 +96,12 @@ function LoginForm() {
       { showError && (
         <span
           data-testid="common_login__element-invalid-email"
+          className="error_login"
         >
-          Elemento oculto(Mensagens de erro)
+          Erro ao fazer login!
         </span>
       )}
-    </form>
+    </FormDiv>
   );
 }
 
