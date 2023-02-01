@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const SaleProduct = sequelize.define('SaleProduct', {
+    const SaleProduct = sequelize.define('SalesProducts', { // coloca no plural
         saleId: {
             autoIncrement: true,
             primaryKey: true,
@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         productId: DataTypes.INTEGER ,
         quantity: DataTypes.INTEGER,
     }, {
-        tableName: 'salesProducts',
+        tableName: 'sales_products', // altera nome tabela
         underscored: true,
         timestamps: false
     })
