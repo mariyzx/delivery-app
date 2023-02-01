@@ -17,6 +17,6 @@ app.use('/login', loginRoutes);
 app.use('/customer/products', productsRoutes);
 app.use('/customer/orders', salesRoutes); // altera rota, estava /sales
 app.use('/register', routers);
-app.use('/admin', adminRoutes);
+app.use('/admin/manage', adminRoutes); // altera a rota, estava /admin
 
 module.exports = app;
