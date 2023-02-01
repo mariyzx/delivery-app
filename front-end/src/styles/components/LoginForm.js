@@ -65,6 +65,13 @@ const FormDiv = styled.form`
     pointer-events: none;
   }
 
+  .error_login {
+    text-align: center;
+    color: red;
+    font-weight: 700;
+    margin-top: 10px;
+  }
+
 `;
 
 export default FormDiv;

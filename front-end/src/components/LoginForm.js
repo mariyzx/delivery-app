@@ -96,8 +96,9 @@ function LoginForm() {
       { showError && (
         <span
           data-testid="common_login__element-invalid-email"
+          className="error_login"
         >
-          Elemento oculto(Mensagens de erro)
+          Erro ao fazer login!
         </span>
       )}
     </FormDiv>
