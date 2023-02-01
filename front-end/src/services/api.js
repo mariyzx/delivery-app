@@ -47,5 +47,12 @@ export const newUser = async (adminData, token) => {
     headers: { authorization: token }, // adiciona token para o backend
   });
   const result = await apiAdmin.post('/admin/manage', { name, email, password, role });
+
+export const getAllOrders = async (token) => {
+  const apiAuth = axios.create({
+    baseURL: `http://localhost:${port}`,
+    headers: { authorization: token }, // adiciona token para o backend
+  });
+  const result = await apiAuth.get('/customer/orders');
   return result.data;
 };
