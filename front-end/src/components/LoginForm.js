@@ -14,11 +14,13 @@ function LoginForm() {
   };
 
   useEffect(() => {
+    const token = JSON.parse(localStorage.getItem('user'));
+    if (token !== null) history.push('/customer/products');
     const min = 6;
     const validEmail = /\S+@\S+\.\S+/.test(loginData.email);
     const validPassword = loginData.password.length >= min;
     setDisabled(!(validEmail && validPassword));
-  }, [loginData]);
+  }, [loginData, history]);
 
   const handleChange = ({ target: { name, value } }) => {
     setLoginData((prev) => ({ ...prev, [name]: value }));

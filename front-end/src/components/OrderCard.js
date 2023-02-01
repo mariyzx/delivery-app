@@ -30,7 +30,7 @@ function OrderCard() {
     <div>
       {orders.map((order) => (
         <div key={ order.id }>
-          <Link to={ `/customer/orders/${order.idid} ` }>
+          <Link to={ `/customer/orders/${order.id} ` }>
             <p data-testid={ `customer_orders__element-order-id-${order.id}` }>
               Pedido
               {' '}
