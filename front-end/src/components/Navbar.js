@@ -36,6 +36,7 @@ function Navbar() {
         data-testid="customer_products__element-navbar-link-logout"
         onClick={ () => clearLS() }
       >
+
         <h3>Sair</h3>
       </Link>
     </div>
