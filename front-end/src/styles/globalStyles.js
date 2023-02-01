@@ -20,8 +20,7 @@ const GlobalStyle = createGlobalStyle`
     min-width: 100%;
     overflow: hidden;
     font-family: 'Poppins', sans-serif;
-    background-color: #262626;
-    color: white;
+    background-color: #fafafa
 }
 `;
 

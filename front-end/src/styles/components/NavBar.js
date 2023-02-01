@@ -5,14 +5,14 @@ export const Header = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 80px;
-  background-color: #d69c33;
+  background-color: black;
   padding-left: 24px;
   position: fixed;
   width: 100%;
   top: 0;
 
-  a {
-    color: white;
+  h3 {
+    color: #F9B717;
   }
   
   .hamburguer {
@@ -53,7 +53,10 @@ export const Menu = styled.div`
   gap: 2rem;
   align-items: center;
   padding-right: 24px;
-
+  
+  h3 {
+    color: white;
+  }
   a {
     transition: 2s ease;
     text-decoration: none;
@@ -69,7 +72,7 @@ export const Menu = styled.div`
     top: 70px;
     gap: 0;
     flex-direction: column;
-    background-color: #d69c33;
+    background-color: #F9B717;
     width: 100%;
     text-align: center;
     transition: 0.3s;

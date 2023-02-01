@@ -4,7 +4,7 @@ import { BsCartFill } from 'react-icons/bs';
 import Card from './Cards';
 import { getAllProducts } from '../services/api';
 import ProvideContext from '../context/ProvideContext';
-import { DivProducts, Cart } from '../styles/pages/Products';
+import { DivProducts, Cart, ListProducts } from '../styles/pages/Products';
 
 function CardMap() {
   const [listProduct, setListProduct] = useState([]);
@@ -39,7 +39,7 @@ function CardMap() {
   return (
     <DivProducts>
       <h1>Products</h1>
-      <div>
+      <ListProducts>
         {
           listProduct.map((product, i) => (
             <div key={ i }>
@@ -47,7 +47,7 @@ function CardMap() {
             </div>
           ))
         }
-      </div>
+      </ListProducts>
       <Cart>
         <button
           data-testid="customer_products__button-cart"
