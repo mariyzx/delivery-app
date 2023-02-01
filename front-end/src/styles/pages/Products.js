@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const DivProducts = styled.div`
   text-align: center;
   margin-top: 6rem;
-  margin-bottom: 1.4rem;
+  margin-bottom: 1.6rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
