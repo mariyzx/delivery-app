@@ -58,3 +58,21 @@ export const getAllOrders = async (token) => {
   const result = await apiAuth.get('/customer/orders');
   return result.data;
 };
+
+export const getOrderById = async (id, token) => {
+  const apiAuth = axios.create({
+    baseURL: `http://localhost:${port}`,
+    headers: { authorization: token }, // adiciona token para o backend
+  });
+  const result = await apiAuth.get(`/customer/orders/${id}`);
+  return result.data;
+};
+
+export const updateOrderStatus = async (id, status, token) => {
+  const apiAuth = axios.create({
+    baseURL: `http://localhost:${port}`,
+    headers: { authorization: token }, // adiciona token para o backend
+  });
+  const result = await apiAuth.put(`/customer/orders/${id}`, { status });
+  return result.data;
+};
