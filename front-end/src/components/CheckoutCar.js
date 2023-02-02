@@ -4,6 +4,7 @@ import ProvideContext from '../context/ProvideContext';
 import { createNewSale } from '../services/api';
 import TableCheckout from '../styles/components/Table';
 import { MainCheckout, Total } from '../styles/pages/Checkout';
+import { saveToLocal } from '../services/saveToLocalStorage';
 
 function CheckoutCar() {
   const { products, setProducts } = useContext(ProvideContext); //
@@ -42,6 +43,8 @@ function CheckoutCar() {
       deliveryNumber: number,
     };
     const data = await createNewSale(obj, arrToSalesProducts, token);
+    saveToLocal('cart', productsList); // salva lista de produtos do pedido
+    saveToLocal('saleId', data.id); // salva id do pedido
     setProducts(productsList);
     history.push(`/customer/orders/${data.id}`);
   };
