@@ -15,7 +15,10 @@ const getSaleById = async (req, res) => {
   const { id } = req.params;
 
   const sale = await salesService.getById(id);
-  if (!sale.sale || !sale.saleProduct) return res.status(404).json({ message: 'Sale does not exist' });
+  if (!sale.sale || !sale.saleProduct) {
+ return res.status(404)
+    .json({ message: 'Sale does not exist' }); 
+}
   return res.status(200).json(sale);
 };
 
