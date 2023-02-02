@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { getAllOrders } from '../services/api';
+import { LinkPedido, MainCard } from '../styles/components/OrderCard';
 
 function OrderCard() {
   const [orders, setOrders] = useState([]);
+  const history = useHistory();
 
   const addNumber = (value) => `000${value}`;
 
@@ -27,9 +29,9 @@ function OrderCard() {
   }, []);
 
   return (
-    <div>
+    <MainCard>
       {orders.map((order) => (
-        <div key={ order.id }>
+        <LinkPedido key={ order.id }>
           <Link to={ `/customer/orders/${order.id} ` }>
             <p data-testid={ `customer_orders__element-order-id-${order.id}` }>
               Pedido
@@ -53,9 +55,15 @@ function OrderCard() {
               {`R$ ${convertValue(order.totalPrice)}`}
             </p>
           </Link>
-        </div>
+        </LinkPedido>
       ))}
-    </div>
+      <button
+        type="button"
+        onClick={ () => history.goBack() }
+      >
+        VOLTAR
+      </button>
+    </MainCard>
   );
 }
 

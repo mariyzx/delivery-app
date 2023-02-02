@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { getOrderById } from '../services/api';
+import MainOrder from '../styles/components/OrderDetailsTable';
+import TableCheckout from '../styles/components/Table';
+import { Total } from '../styles/pages/Checkout';
 
 function OrderDetailsTable() {
   const [orderDetails, setOrderDetails] = useState([]);
   const [productsList, setProductsList] = useState([]);
   const [formattedPrice, setFormattedPrice] = useState();
   const [orderStatus, setOrderStatus] = useState();
+  const history = useHistory();
 
   const dataTest = (name, index) => {
     const data = `customer_order_details__element-order-details-label-${name}-${index}`;
@@ -41,10 +46,10 @@ function OrderDetailsTable() {
   }, []);
 
   return (
-    <div>
+    <MainOrder>
       <h1>Detalhe Pedido</h1>
       {productsList.length === 0 ? <p>Nenhum pedido cadastrado</p> : (
-        <table>
+        <TableCheckout>
           <thead>
             <tr>
               <th
@@ -75,6 +80,7 @@ function OrderDetailsTable() {
                   type="button"
                   data-testid="customer_order_details__button-delivery-check"
                   disabled
+                  className="deliveredButton"
                 >
                   Marcar como entregue
                 </button>
@@ -119,16 +125,22 @@ function OrderDetailsTable() {
               </tr>
             ))}
           </tbody>
-        </table>
+        </TableCheckout>
       )}
-      <p
+      <Total
         data-testid="customer_order_details__element-order-total-price"
       >
         Total:
         {' '}
         {formattedPrice}
-      </p>
-    </div>
+      </Total>
+      <button
+        type="button"
+        onClick={ () => history.goBack() }
+      >
+        VOLTAR
+      </button>
+    </MainOrder>
   );
 }
 

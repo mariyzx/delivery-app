@@ -35,7 +35,7 @@ export const MainCheckout = styled.div`
   }
 
   h1 {
-    margin-bottom: 1rem;
+    margin-bottom: 3px;
   }
 
   button {
@@ -65,6 +65,12 @@ export const MainCheckout = styled.div`
 
 export const Total = styled.p`
   font-weight: bolder;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 5px;
+  margin-bottom: 5px;
+`;
+
+export const DivButtons = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
 `;

@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import ProvideContext from '../context/ProvideContext';
 import { createNewSale } from '../services/api';
 import TableCheckout from '../styles/components/Table';
-import { MainCheckout, Total } from '../styles/pages/Checkout';
+import { DivButtons, MainCheckout, Total } from '../styles/pages/Checkout';
 import { saveToLocal } from '../services/saveToLocalStorage';
 
 function CheckoutCar() {
@@ -146,13 +146,21 @@ function CheckoutCar() {
         onChange={ ({ target: { value } }) => setNumber(value) }
       />
 
-      <button
-        type="button"
-        data-testid="customer_checkout__button-submit-order"
-        onClick={ sendNewSale }
-      >
-        Finalizar Pedido
-      </button>
+      <DivButtons>
+        <button
+          type="button"
+          data-testid="customer_checkout__button-submit-order"
+          onClick={ sendNewSale }
+        >
+          Finalizar Pedido
+        </button>
+        <button
+          type="button"
+          onClick={ () => history.goBack() }
+        >
+          VOLTAR
+        </button>
+      </DivButtons>
     </MainCheckout>
   );
 }

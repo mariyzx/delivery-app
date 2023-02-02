@@ -18,7 +18,7 @@ const TableCheckout = styled.table`
     border: 3px solid #d69c33;
   }
 
-  .removeButton {
+  .removeButton, .deliveredButton {
     background: transparent;
     border: none;
     color: #d69c33;
@@ -31,7 +31,7 @@ const TableCheckout = styled.table`
   @media (max-width: 480px) {
     font-size: 12px;
     
-    .removeButton {
+    .removeButton, .deliveredButton {
       font-size: 12px;
     }
 
