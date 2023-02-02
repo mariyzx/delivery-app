@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { getOrderById } from '../services/api';
 
 function OrderDetailsTable() {
   const [orderDetails, setOrderDetails] = useState([]);
@@ -27,12 +28,14 @@ function OrderDetailsTable() {
 
   useEffect(() => {
     const getOrder = async () => {
-      const finalSale = JSON.parse(localStorage.getItem('cart'));
-      const getOrderDetails = JSON.parse(localStorage.getItem('orderDetails'));
-      setOrderDetails(getOrderDetails);
-      setProductsList(finalSale);
-      setFormattedPrice(getOrderDetails.totalPrice.replace('.', ','));
-      setOrderStatus(getOrderDetails.status);
+      const { token } = JSON.parse(localStorage.getItem('user'));
+      const finalOrder = JSON.parse(localStorage.getItem('cart'));
+      const orderId = JSON.parse(localStorage.getItem('saleId'));
+      const result = await getOrderById(orderId, token);
+      setOrderDetails(result);
+      setProductsList(finalOrder);
+      setFormattedPrice(result.totalPrice.replace('.', ','));
+      setOrderStatus(result.status);
     };
     getOrder();
   }, []);
@@ -71,7 +74,7 @@ function OrderDetailsTable() {
                   // onClick={ updateStatus }
                   type="button"
                   data-testid="customer_order_details__button-delivery-check"
-                  disabled="true"
+                  disabled
                 >
                   Marcar como entregue
                 </button>

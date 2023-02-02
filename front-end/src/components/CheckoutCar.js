@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import ProvideContext from '../context/ProvideContext';
-import { createNewSale, getOrderById } from '../services/api';
+import { createNewSale } from '../services/api';
 import { saveToLocal } from '../services/saveToLocalStorage';
 
 function CheckoutCar() {
@@ -41,10 +41,8 @@ function CheckoutCar() {
       deliveryNumber: number,
     };
     const data = await createNewSale(obj, arrToSalesProducts, token);
-    const result = await getOrderById(data.id, token); // pega pedido pelo id e salva no localstorage
     saveToLocal('cart', productsList); // salva lista de produtos do pedido
     saveToLocal('saleId', data.id); // salva id do pedido
-    saveToLocal('orderDetails', result); // salva detalhes do pedido
     setProducts(productsList);
     history.push(`/customer/orders/${data.id}`);
   };
