@@ -2,20 +2,17 @@ import styled from 'styled-components';
 
 const TableCheckout = styled.table`
   border-collapse: collapse;
-  border: 3px solid #d69c33;
   padding: 10px;
 
   th {
     margin: 2rem;
     padding: 10px;
-    border: 3px solid #d69c33;
   }
 
   td {
     text-align: center;
     margin: 2rem;
     padding: 10px;
-    border: 3px solid #d69c33;
   }
 
   .removeButton, .deliveredButton {

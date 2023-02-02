@@ -50,6 +50,14 @@ const FormDiv = styled.form`
     cursor: pointer;
     margin-top: 5px;
   }
+  
+  button:nth-of-type(2) {
+    background: transparent;
+    color: #777;
+    box-shadow: none;
+    text-decoration: underline;
+    font-size: 17px;
+  }
 
   button:hover {
     background: rgb(2,0,36);
