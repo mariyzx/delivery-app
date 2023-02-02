@@ -34,7 +34,8 @@ function LoginForm() {
     }
     if (role === 'administrator') {
       history.push('/admin/manage');
-    } else { // + adiciona else
+    }
+    if (role === 'customer') {
       history.push('/customer/products');
     }
   };

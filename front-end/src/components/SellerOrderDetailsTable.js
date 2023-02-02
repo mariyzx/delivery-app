@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getOrderById, getProductById } from '../services/api';
 
-function OrderDetailsTable() {
+function SellerOrderDetailsTable() {
   const [orderDetails, setOrderDetails] = useState([]);
   const [productsList, setProductsList] = useState([]);
   const [formattedPrice, setFormattedPrice] = useState();
@@ -10,12 +10,12 @@ function OrderDetailsTable() {
   const array = [];
 
   const dataTest = (name, index) => {
-    const data = `customer_order_details__element-order-details-label-${name}-${index}`;
+    const data = `seller_order_details__element-order-table-${name}-${index}`;
     return data;
   };
 
   const dataTestId = (name) => {
-    const data = `customer_order_details__element-order-details-label-${name}`;
+    const data = `seller_order_details__element-order-details-label-${name}`;
     return data;
   };
 
@@ -66,20 +66,26 @@ function OrderDetailsTable() {
                 {formatDate(orderDetails.saleDate)}
               </th>
               <th
-                data-testid={ dataTest('delivery-status', orderDetails.id) }
+                data-testid={ dataTestId('delivery-status') }
               >
                 {orderDetails.status}
               </th>
-              <th
-                data-testid={ dataTest('delivery-status', orderDetails.id) }
-              >
+              <th>
                 <button
                   // onClick={ updateStatus }
                   type="button"
-                  data-testid="customer_order_details__button-delivery-check"
-                  disabled
+                  data-testid="seller_order_details__button-preparing-check"
                 >
-                  Marcar como entregue
+                  Preparar pedido
+                </button>
+              </th>
+              <th>
+                <button
+                  // onClick={ updateStatus }
+                  type="button"
+                  data-testid="seller_order_details__button-dispatch-check"
+                >
+                  Saiu para entrega
                 </button>
               </th>
             </tr>
@@ -135,4 +141,4 @@ function OrderDetailsTable() {
   );
 }
 
-export default OrderDetailsTable;
+export default SellerOrderDetailsTable;

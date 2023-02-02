@@ -43,7 +43,10 @@ const getAll = async () => {
 
 const getById = async (id) => {
   const sale = await Sale.findByPk(id);
-  return sale;
+  const saleProduct = await SalesProducts.findAll({
+    where: { sale_id: id } // precisa retornar nao so os dados de sales, mas tb salesproducts
+  });
+  return { sale, saleProduct };
 };
 
 const update = async (id, body) => {
