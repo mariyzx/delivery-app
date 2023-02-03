@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import ProvideContext from '../context/ProvideContext';
 import { createNewSale } from '../services/api';
+import TableCheckout from '../styles/components/Table';
+import { DivButtons, Divider, MainCheckout, Total } from '../styles/pages/Checkout';
 import { saveToLocal } from '../services/saveToLocalStorage';
 
 function CheckoutCar() {
@@ -57,10 +59,10 @@ function CheckoutCar() {
   };
 
   return (
-    <div>
+    <MainCheckout>
       <h1>Finalizar Pedido</h1>
       {productsList.length === 0 ? <p>Nenhum pedido cadastrado</p> : (
-        <table>
+        <TableCheckout>
           <thead>
             <tr>
               <th>Item</th>
@@ -105,6 +107,7 @@ function CheckoutCar() {
                   <button
                     onClick={ () => removeItem(product.name) }
                     type="button"
+                    className="removeButton"
                   >
                     Remover
                   </button>
@@ -112,15 +115,18 @@ function CheckoutCar() {
               </tr>
             ))}
           </tbody>
-        </table>
+        </TableCheckout>
       )}
-      <p
+      <Total
         data-testid="customer_checkout__element-order-total-price"
       >
         Total:
         {' '}
         {calculateProducts()}
-      </p>
+      </Total>
+
+      <Divider />
+
       <h1>Detalhes e endereço para Entrega</h1>
 
       <span>P. Vendedora Responsavel</span>
@@ -143,14 +149,22 @@ function CheckoutCar() {
         onChange={ ({ target: { value } }) => setNumber(value) }
       />
 
-      <button
-        type="button"
-        data-testid="customer_checkout__button-submit-order"
-        onClick={ sendNewSale }
-      >
-        Finalizar Pedido
-      </button>
-    </div>
+      <DivButtons>
+        <button
+          type="button"
+          data-testid="customer_checkout__button-submit-order"
+          onClick={ sendNewSale }
+        >
+          Finalizar Pedido
+        </button>
+        <button
+          type="button"
+          onClick={ () => history.goBack() }
+        >
+          VOLTAR
+        </button>
+      </DivButtons>
+    </MainCheckout>
   );
 }
 

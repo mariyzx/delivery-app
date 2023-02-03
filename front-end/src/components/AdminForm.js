@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { newUser } from '../services/api';
+import { MainAdmin, FormAdmin } from '../styles/components/AdminForm';
 
 function AdminForm() {
   const [disabled, setDisabled] = useState(true);
@@ -7,6 +9,7 @@ function AdminForm() {
     { name: '', email: '', password: '', role: 'seller' },
   );
   const [showError, setShowError] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     const minPass = 6;
@@ -34,9 +37,9 @@ function AdminForm() {
   };
 
   return (
-    <div>
+    <MainAdmin>
       <h1>Cadastrar novo usuario</h1>
-      <form>
+      <FormAdmin>
         <label htmlFor="name-input">
           <span>Nome</span>
           <input
@@ -99,15 +102,22 @@ function AdminForm() {
         >
           CADASTRAR
         </button>
-      </form>
+        <button
+          type="button"
+          onClick={ () => history.goBack() }
+        >
+          VOLTAR
+        </button>
+      </FormAdmin>
       { showError && (
         <span
           data-testid="admin_manage__element-invalid-register"
+          className="errorRegister"
         >
-          Elemento oculto(Mensagens de erro)
+          Erro ao cadastrar usuário!
         </span>
       )}
-    </div>
+    </MainAdmin>
   );
 }
 

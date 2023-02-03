@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { registerNewUser } from '../services/api';
+import { saveToLocal } from '../services/saveToLocalStorage';
+import { FormRegister, MainRegister } from '../styles/components/RegisterForm';
 
 function RegisterForm() {
   const [disabled, setDisabled] = useState(true);
@@ -16,6 +18,11 @@ function RegisterForm() {
     try {
       const { name, email, password } = registerData;
       const data = await registerNewUser(name, email, password);
+      const obj = {
+        ...data,
+        role: 'customer',
+      };
+      saveToLocal('user', obj);
       if (data) {
         history.push('/customer/products');
       }
@@ -34,9 +41,9 @@ function RegisterForm() {
   }, [registerData]);
 
   return (
-    <div>
+    <MainRegister>
       <h1>Cadastro</h1>
-      <form>
+      <FormRegister>
         <label htmlFor="name-input">
           <span>Nome</span>
           <input
@@ -74,7 +81,8 @@ function RegisterForm() {
             placeholder="********"
           />
         </label>
-
+      </FormRegister>
+      <div>
         <button
           type="button"
           data-testid="common_register__button-register"
@@ -88,11 +96,17 @@ function RegisterForm() {
           <span
             data-testid="common_register__element-invalid_register"
           >
-            Elemento oculto(Mensagens de erro)
+            Erro ao cadastrar!
           </span>
         )}
-      </form>
-    </div>
+        <button
+          type="button"
+          onClick={ () => history.goBack() }
+        >
+          VOLTAR
+        </button>
+      </div>
+    </MainRegister>
   );
 }
 

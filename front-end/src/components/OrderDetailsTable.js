@@ -1,6 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { getOrderById, getProductById, updateOrderStatus } from '../services/api';
+import MainOrder from '../styles/components/OrderDetailsTable';
+import TableCheckout from '../styles/components/Table';
+import { Total } from '../styles/pages/Checkout';
 
 function OrderDetailsTable() {
   const [orderDetails, setOrderDetails] = useState([]);
@@ -8,6 +11,8 @@ function OrderDetailsTable() {
   const [formattedPrice, setFormattedPrice] = useState();
   const [disabled, setDisabled] = useState(true);
   const { id } = useParams();
+  const [orderStatus, setOrderStatus] = useState();
+  const history = useHistory();
 
   const dataTest = (name, index) => {
     const data = `customer_order_details__element-order-details-label-${name}-${index}`;
@@ -57,10 +62,10 @@ function OrderDetailsTable() {
   }, [getAllProducts, id]);
 
   return (
-    <div>
+    <MainOrder>
       <h1>Detalhe Pedido</h1>
       {productsList.length === 0 ? <p>Nenhum pedido cadastrado</p> : (
-        <table>
+        <TableCheckout>
           <thead>
             <tr>
               <th
@@ -91,6 +96,7 @@ function OrderDetailsTable() {
                   type="button"
                   data-testid="customer_order_details__button-delivery-check"
                   disabled={ disabled }
+                  className="deliveredButton"
                 >
                   Marcar como entregue
                 </button>
@@ -135,16 +141,22 @@ function OrderDetailsTable() {
               </tr>
             ))}
           </tbody>
-        </table>
+        </TableCheckout>
       )}
-      <p
+      <Total
         data-testid="customer_order_details__element-order-total-price"
       >
         Total:
         {' '}
         {formattedPrice}
-      </p>
-    </div>
+      </Total>
+      <button
+        type="button"
+        onClick={ () => history.goBack() }
+      >
+        VOLTAR
+      </button>
+    </MainOrder>
   );
 }
 

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { clearLS } from '../helpers/localStorage';
+import { Header, Menu } from '../styles/components/NavBar';
 // import { fechUser } from '../api/featch';
 
 function Navbar() {
   const [user, setUser] = useState({});
   const { pathname } = window.location;
+  const [menu, setMenu] = useState('');
 
   useEffect(() => {
     // fechUser(setUser);
@@ -13,44 +15,48 @@ function Navbar() {
     setUser({ name: getUser.name });
   }, []);
 
+  const toggleMenu = () => {
+    if (menu === 'active') {
+      setMenu('');
+    } else {
+      setMenu('active');
+    }
+  };
+
   return (
-    <div>
-      { pathname.includes('customer') && (
+    <Header>
+      <div
+        data-testid="customer_products__element-navbar-user-full-name"
+      >
+        <h3>{ `${user.name}` }</h3>
+      </div>
+      <Menu className={ menu }>
         <Link
           to="/customer/products"
           data-testid="customer_products__element-navbar-link-products"
         >
           <h3>PRODUTOS</h3>
         </Link>
-      )}
-      { pathname.includes('customer') ? (
         <Link
           to="/customer/orders"
           data-testid="customer_products__element-navbar-link-orders"
         >
           <h3>MEUS PEDIDOS</h3>
         </Link>
-      ) : (
         <Link
-          to="/seller/orders"
-          data-testid="customer_products__element-navbar-link-orders"
+          to="/"
+          data-testid="customer_products__element-navbar-link-logout"
+          onClick={ () => clearLS() }
         >
-          <h3>PEDIDOS</h3>
+          <h3>SAIR</h3>
         </Link>
-      )}
-      <div
-        data-testid="customer_products__element-navbar-user-full-name"
-      >
-        <h3>{ `Usuário: ${user.name}` }</h3>
-      </div>
-      <Link
-        to="/"
-        data-testid="customer_products__element-navbar-link-logout"
-        onClick={ () => clearLS() }
-      >
-        <h3>Sair</h3>
-      </Link>
-    </div>
+      </Menu>
+      <button className="hamburguer" type="button" onClick={ toggleMenu }>
+        <span className="bar" />
+        <span className="bar" />
+        <span className="bar" />
+      </button>
+    </Header>
   );
 }
 

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
-import './index.css';
+import GlobalStyle from './styles/globalStyles';
 import App from './App';
 import GetContext from './context/GetContext';
 
@@ -10,6 +10,7 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <GetContext>
+        <GlobalStyle />
         <App />
       </GetContext>
     </BrowserRouter>
