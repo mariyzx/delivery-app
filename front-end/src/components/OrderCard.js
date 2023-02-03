@@ -30,6 +30,12 @@ function OrderCard() {
 
   return (
     <MainCard>
+      <button
+        type="button"
+        onClick={ () => history.goBack() }
+      >
+        VOLTAR
+      </button>
       {orders.map((order) => (
         <LinkPedido key={ order.id }>
           <Link to={ `/customer/orders/${order.id} ` }>
@@ -57,12 +63,6 @@ function OrderCard() {
           </Link>
         </LinkPedido>
       ))}
-      <button
-        type="button"
-        onClick={ () => history.goBack() }
-      >
-        VOLTAR
-      </button>
     </MainCard>
   );
 }

@@ -5,9 +5,13 @@ export const MainCheckout = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 6rem;
+  margin-top: 6.5rem;
   gap: 0.5rem;
   text-align: center;
+
+  h1 {
+    font-size: 25px;
+  }
 
   input {
     border: 1px solid #f2f1f1;
@@ -51,6 +55,14 @@ export const MainCheckout = styled.div`
     margin-bottom: 10px;
   }
 
+  button:nth-of-type(2) {
+    background: transparent;
+    color: #777;
+    box-shadow: none;
+    text-decoration: underline;
+    font-size: 17px;
+  }
+
   button:hover {
     background: rgb(2,0,36);
     background: linear-gradient(to right, #f2b705, #d69c33);
@@ -65,12 +77,22 @@ export const MainCheckout = styled.div`
 
 export const Total = styled.p`
   font-weight: bolder;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 10px;
 `;
 
 export const DivButtons = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 10px;
+`;
+
+export const Divider = styled.hr`
+  width: 15%;
+  margin: auto;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  height: 5px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background: linear-gradient(to right, #f2b705, #d69c33);
 `;

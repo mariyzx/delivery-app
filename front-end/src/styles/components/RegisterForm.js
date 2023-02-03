@@ -1,29 +1,25 @@
 import styled from 'styled-components';
 
-export const MainAdmin = styled.div`
+export const MainRegister = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-evenly;
   align-items: center;
   margin-top: 2rem;
   gap: 2rem;
-  text-align: center;
-`;
+  height: 80vh;
 
-export const FormAdmin = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-
+  h1 {
+    position: fixed;
+    top: 1.5rem;
+  }
+    
   label {
     display: flex;
     flex-direction: column;
   }
 
  label > input {
-    margin-top: 2px;
     line-height: 28px;
     border: 2px solid transparent;
     border-bottom-color: #777;
@@ -59,7 +55,6 @@ export const FormAdmin = styled.form`
     color: white;
     border-radius: 4px;
     cursor: pointer;
-    margin-top: 5px;
   }
 
   button:nth-of-type(2) {
@@ -69,7 +64,7 @@ export const FormAdmin = styled.form`
     text-decoration: underline;
     font-size: 17px;
   }
-
+  
   button:hover {
     background: rgb(2,0,36);
     background: linear-gradient(to right, #f2b705, #d69c33);
@@ -79,21 +74,26 @@ export const FormAdmin = styled.form`
     transform: translate(0em, 0.2em);
   }
 
-  select {
-    width: 110%;
-    padding: 2px;
-    border: 1px solid #f2f1f1;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    background-color: transparent;
-    box-shadow: 0 4px 2px -2px #D3D3D3;
-    text-align: center;
+  button:disabled {
+    opacity: 0.70; 
+    pointer-events: none;
   }
 
-  .errorRegister {
-    text-align: center;
-    color: red;
-    font-weight: 700;
-    margin-top: 10px;
+  div {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    bottom: 1.5rem;
   }
+`;
+
+export const FormRegister = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+
 `;

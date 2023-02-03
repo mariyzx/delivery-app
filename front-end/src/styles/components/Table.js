@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const TableCheckout = styled.table`
   border-collapse: collapse;
   padding: 10px;
+  margin-top: 0.75rem;
 
   th {
     margin: 2rem;
@@ -25,11 +26,17 @@ const TableCheckout = styled.table`
     margin: 0;
   }
 
+  .removeButton:hover, .deliveredButton:hover {
+    color: #777;
+  }
+
   @media (max-width: 480px) {
-    font-size: 12px;
+    font-size: 13px;
     
     .removeButton, .deliveredButton {
       font-size: 12px;
+      padding: 0;
+      margin: 0;
     }
 
     th {
@@ -39,15 +46,6 @@ const TableCheckout = styled.table`
     td {
       margin: 0;
       padding: 0;
-    }
-  }
-
-  @media (max-width: 565px) {
-    font-size: 12px;
-    
-    .removeButton {
-      padding: 0;
-      margin: 0;
     }
   }
 `;

@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import ProvideContext from '../context/ProvideContext';
 import { createNewSale } from '../services/api';
 import TableCheckout from '../styles/components/Table';
-import { DivButtons, MainCheckout, Total } from '../styles/pages/Checkout';
+import { DivButtons, Divider, MainCheckout, Total } from '../styles/pages/Checkout';
 import { saveToLocal } from '../services/saveToLocalStorage';
 
 function CheckoutCar() {
@@ -124,6 +124,9 @@ function CheckoutCar() {
         {' '}
         {calculateProducts()}
       </Total>
+
+      <Divider />
+
       <h1>Detalhes e endereço para Entrega</h1>
 
       <span>P. Vendedora Responsavel</span>

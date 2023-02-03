@@ -10,16 +10,12 @@ const MainOrder = styled.div`
   align-items: center;
 
   button {
+    background: transparent;
+    color: #777;
+    margin-top: 10px;
+    border: 2px solid transparent;
+    text-decoration: underline;
     font-size: 17px;
-    padding: 0.5em 2em;
-    border: transparent;
-    box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
-    background: #f4bb10;
-    font-weight: 30px;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 5px;
   }
 `;
 

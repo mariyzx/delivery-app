@@ -23,6 +23,10 @@ export const CardDiv = styled.div`
     font-size: 17px;
   }
 
+  button:hover {
+    cursor: pointer;
+  }
+
   input {
     background-color: transparent;
     border: 2px solid transparent;

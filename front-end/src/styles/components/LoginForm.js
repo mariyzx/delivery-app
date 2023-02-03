@@ -64,6 +64,12 @@ const FormDiv = styled.form`
     background: linear-gradient(to right, #f2b705, #d69c33);
   }
 
+  button:nth-of-type(2):hover {
+    background: transparent;
+    color: linear-gradient(to right, #f2b705, #d69c33);
+
+  }
+
   button:active {
     transform: translate(0em, 0.2em);
   }
