@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getOrderById, getProductById } from '../services/api';
+import { getOrderById, getProductById, updateOrderStatus } from '../services/api';
 
 function OrderDetailsTable() {
   const [orderDetails, setOrderDetails] = useState([]);
   const [productsList, setProductsList] = useState([]);
   const [formattedPrice, setFormattedPrice] = useState();
+  const [disabled, setDisabled] = useState(true);
   const { id } = useParams();
-  const array = [];
 
   const dataTest = (name, index) => {
     const data = `customer_order_details__element-order-details-label-${name}-${index}`;
@@ -24,24 +24,37 @@ function OrderDetailsTable() {
     return result.toLocaleDateString('pt-BR');
   };
 
-  const getAllProducts = async (product) => {
+  const getAllProducts = useCallback(async (product) => {
     const allProducts = await getProductById(product.productId);
-    array.push({ ...allProducts, quantity: product.quantity });
-    setProductsList(array);
+    setProductsList(
+      (prevState) => [...prevState, { ...allProducts, quantity: product.quantity }],
+    );
+  }, []);
+
+  const updateStatus = async () => {
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    const status = 'Entregue';
+
+    await updateOrderStatus(id, status, token);
+    const result = await getOrderById(id, token);
+    setOrderDetails(result.sale);
+    setDisabled(true);
   };
 
   useEffect(() => {
+    const { token } = JSON.parse(localStorage.getItem('user'));
     const getOrder = async () => {
-      const { token } = JSON.parse(localStorage.getItem('user'));
       const result = await getOrderById(id, token);
       setOrderDetails(result.sale);
-      console.log('renderizou');
+      if (result.sale.status === 'Em Trânsito') setDisabled(false);
+
       result.saleProduct.forEach((product) => getAllProducts(product));
+
       setFormattedPrice(result.sale.totalPrice.replace('.', ','));
     };
+    setProductsList([]);
     getOrder();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [getAllProducts, id]);
 
   return (
     <div>
@@ -74,10 +87,10 @@ function OrderDetailsTable() {
                 data-testid={ dataTest('delivery-status', orderDetails.id) }
               >
                 <button
-                  // onClick={ updateStatus }
+                  onClick={ updateStatus }
                   type="button"
                   data-testid="customer_order_details__button-delivery-check"
-                  disabled
+                  disabled={ disabled }
                 >
                   Marcar como entregue
                 </button>

@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getOrderById, getProductById } from '../services/api';
+import { getOrderById, getProductById, updateOrderStatus } from '../services/api';
 
 function SellerOrderDetailsTable() {
   const [orderDetails, setOrderDetails] = useState([]);
   const [productsList, setProductsList] = useState([]);
   const [formattedPrice, setFormattedPrice] = useState();
+  const [preparingButton, setPreparingButton] = useState();
+  const [dispatchButton, setDispatchButton] = useState();
   const { id } = useParams();
-  const array = [];
+  // const array = [];
 
   const dataTest = (name, index) => {
     const data = `seller_order_details__element-order-table-${name}-${index}`;
@@ -24,24 +26,46 @@ function SellerOrderDetailsTable() {
     return result.toLocaleDateString('pt-BR');
   };
 
-  const getAllProducts = async (product) => {
-    const allProducts = await getProductById(product.productId);
-    array.push({ ...allProducts, quantity: product.quantity });
-    setProductsList(array);
+  const checkStatus = (status) => {
+    setPreparingButton(status !== 'Pendente');
+    setDispatchButton(status !== 'Preparando' || status === 'Em Trânsito');
   };
 
+  const updateStatus = async (event) => {
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    let newStatus;
+
+    if (event.target.name === 'preparing') {
+      newStatus = 'Preparando';
+    } else if (event.target.name === 'dispatch') {
+      newStatus = 'Em Trânsito';
+    }
+
+    await updateOrderStatus(id, newStatus, token);
+    const result = await getOrderById(id, token);
+    checkStatus(result.sale.status);
+    setOrderDetails(result.sale);
+  };
+
+  const getAllProducts = useCallback(async (product) => {
+    const allProducts = await getProductById(product.productId);
+    setProductsList(
+      (prevState) => [...prevState, { ...allProducts, quantity: product.quantity }],
+    );
+  }, []);
+
   useEffect(() => {
+    const { token } = JSON.parse(localStorage.getItem('user'));
     const getOrder = async () => {
-      const { token } = JSON.parse(localStorage.getItem('user'));
       const result = await getOrderById(id, token);
+      checkStatus(result.sale.status);
       setOrderDetails(result.sale);
-      console.log('renderizou');
+      setProductsList([]);
       result.saleProduct.forEach((product) => getAllProducts(product));
       setFormattedPrice(result.sale.totalPrice.replace('.', ','));
     };
     getOrder();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [getAllProducts, id]);
 
   return (
     <div>
@@ -72,18 +96,22 @@ function SellerOrderDetailsTable() {
               </th>
               <th>
                 <button
-                  // onClick={ updateStatus }
+                  onClick={ updateStatus }
                   type="button"
                   data-testid="seller_order_details__button-preparing-check"
+                  name="preparing"
+                  disabled={ preparingButton }
                 >
                   Preparar pedido
                 </button>
               </th>
               <th>
                 <button
-                  // onClick={ updateStatus }
+                  onClick={ updateStatus }
                   type="button"
                   data-testid="seller_order_details__button-dispatch-check"
+                  name="dispatch"
+                  disabled={ dispatchButton }
                 >
                   Saiu para entrega
                 </button>
@@ -131,7 +159,7 @@ function SellerOrderDetailsTable() {
         </table>
       )}
       <p
-        data-testid="customer_order_details__element-order-total-price"
+        data-testid="seller_order_details__element-order-total-price"
       >
         Total:
         {' '}
