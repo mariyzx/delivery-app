@@ -45,7 +45,7 @@ function CheckoutCar() {
     const data = await createNewSale(obj, arrToSalesProducts, token);
     saveToLocal('cart', productsList); // salva lista de produtos do pedido
     saveToLocal('saleId', data.id); // salva id do pedido
-    setProducts(productsList);
+    setProducts([]);
     history.push(`/customer/orders/${data.id}`);
   };
 

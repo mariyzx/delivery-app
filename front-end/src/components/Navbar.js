@@ -6,6 +6,7 @@ import { Header, Menu } from '../styles/components/NavBar';
 
 function Navbar() {
   const [user, setUser] = useState({});
+  const { pathname } = window.location;
   const [menu, setMenu] = useState('');
 
   useEffect(() => {
