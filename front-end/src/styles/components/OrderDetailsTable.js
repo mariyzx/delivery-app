@@ -14,8 +14,11 @@ const MainOrder = styled.div`
     color: #777;
     margin-top: 10px;
     border: 2px solid transparent;
-    text-decoration: underline;
     font-size: 17px;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
   }
 `;
 

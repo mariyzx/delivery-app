@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getAllOrders } from '../services/api';
+import { LinkPedido } from '../styles/components/OrderCard';
+import { MainSeller } from '../styles/components/SellerCard';
 
 function OrderCard() {
   const [orders, setOrders] = useState([]);
@@ -28,9 +30,9 @@ function OrderCard() {
   console.log(orders);
 
   return (
-    <div>
+    <MainSeller>
       {orders.map((order) => (
-        <div key={ order.id }>
+        <LinkPedido key={ order.id }>
           <Link to={ `/seller/orders/${order.id} ` }>
             <p data-testid={ `seller_orders__element-order-id-${order.id}` }>
               Pedido
@@ -58,9 +60,9 @@ function OrderCard() {
               { `${order.deliveryAddress}, ${order.deliveryNumber}` }
             </p>
           </Link>
-        </div>
+        </LinkPedido>
       ))}
-    </div>
+    </MainSeller>
   );
 }
 

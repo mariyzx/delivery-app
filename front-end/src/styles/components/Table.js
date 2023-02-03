@@ -26,7 +26,7 @@ const TableCheckout = styled.table`
     margin: 0;
   }
 
-  .removeButton:hover, .deliveredButton:hover {
+  .removeButton:hover {
     color: #777;
   }
 

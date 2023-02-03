@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getOrderById, getProductById, updateOrderStatus } from '../services/api';
+import { SellerDetails } from '../styles/components/SellerCard';
+import TableCheckout from '../styles/components/Table';
 
 function SellerOrderDetailsTable() {
   const [orderDetails, setOrderDetails] = useState([]);
@@ -68,10 +70,10 @@ function SellerOrderDetailsTable() {
   }, [getAllProducts, id]);
 
   return (
-    <div>
+    <SellerDetails>
       <h1>Detalhe Pedido</h1>
       {productsList.length === 0 ? <p>Nenhum pedido cadastrado</p> : (
-        <table>
+        <TableCheckout>
           <thead>
             <tr>
               <th
@@ -156,7 +158,7 @@ function SellerOrderDetailsTable() {
               </tr>
             ))}
           </tbody>
-        </table>
+        </TableCheckout>
       )}
       <p
         data-testid="seller_order_details__element-order-total-price"
@@ -165,7 +167,7 @@ function SellerOrderDetailsTable() {
         {' '}
         {formattedPrice}
       </p>
-    </div>
+    </SellerDetails>
   );
 }
 
