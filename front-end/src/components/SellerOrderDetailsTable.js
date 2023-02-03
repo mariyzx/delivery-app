@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { getOrderById, getProductById, updateOrderStatus } from '../services/api';
 import { SellerDetails } from '../styles/components/SellerCard';
 import TableCheckout from '../styles/components/Table';
+import { Total } from '../styles/pages/Checkout';
 
 function SellerOrderDetailsTable() {
   const [orderDetails, setOrderDetails] = useState([]);
@@ -160,13 +161,13 @@ function SellerOrderDetailsTable() {
           </tbody>
         </TableCheckout>
       )}
-      <p
+      <Total
         data-testid="seller_order_details__element-order-total-price"
       >
         Total:
         {' '}
         {formattedPrice}
-      </p>
+      </Total>
     </SellerDetails>
   );
 }
