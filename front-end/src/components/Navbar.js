@@ -5,6 +5,7 @@ import { clearLS } from '../helpers/localStorage';
 
 function Navbar() {
   const [user, setUser] = useState({});
+  const { pathname } = window.location;
 
   useEffect(() => {
     // fechUser(setUser);
@@ -14,18 +15,29 @@ function Navbar() {
 
   return (
     <div>
-      <Link
-        to="/customer/products"
-        data-testid="customer_products__element-navbar-link-products"
-      >
-        <h3>PRODUTOS</h3>
-      </Link>
-      <Link
-        to="/customer/orders"
-        data-testid="customer_products__element-navbar-link-orders"
-      >
-        <h3>MEUS PEDIDOS</h3>
-      </Link>
+      { pathname.includes('customer') && (
+        <Link
+          to="/customer/products"
+          data-testid="customer_products__element-navbar-link-products"
+        >
+          <h3>PRODUTOS</h3>
+        </Link>
+      )}
+      { pathname.includes('customer') ? (
+        <Link
+          to="/customer/orders"
+          data-testid="customer_products__element-navbar-link-orders"
+        >
+          <h3>MEUS PEDIDOS</h3>
+        </Link>
+      ) : (
+        <Link
+          to="/seller/orders"
+          data-testid="customer_products__element-navbar-link-orders"
+        >
+          <h3>PEDIDOS</h3>
+        </Link>
+      )}
       <div
         data-testid="customer_products__element-navbar-user-full-name"
       >
