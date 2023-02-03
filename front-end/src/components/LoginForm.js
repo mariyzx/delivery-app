@@ -29,14 +29,9 @@ function LoginForm() {
   const getRole = (data) => {
     const { role } = data;
     saveToLocal('user', data);
-    if (role === 'seller') {
-      history.push('/seller/orders');
-    }
-    if (role === 'administrator') {
-      history.push('/admin/manage');
-    } else { // + adiciona else
-      history.push('/customer/products');
-    }
+    if (role === 'seller') return history.push('/seller/orders');
+    if (role === 'administrator') return history.push('/admin/manage');
+    if (role === 'customer') return history.push('/customer/products');
   };
 
   const handleLogin = async () => {
