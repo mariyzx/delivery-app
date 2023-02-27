@@ -2,10 +2,10 @@ const express = require('express');
 const cors = require('cors');
 
 const loginRoutes = require('../routes/login.routes');
-const routers = require('../routers/register.router');
+const routers = require('../routes/register.routes');
 const productsRoutes = require('../routes/products.routes');
 const salesRoutes = require('../routes/sales.routes');
-const adminRoutes = require('../routers/admin.router');
+const adminRoutes = require('../routes/admin.routes');
 
 const app = express();
 app.use(cors());
