@@ -27,7 +27,7 @@ Consulte **[Instalação](#install)** para saber como rodar o projeto.
   ``Node``
   > O projeto espera que sua versão do node seja a 16.
   
-## 🔧 Instalação <a class="install"></a>
+## 🔧 Instalação <a name="install"></a>
 
 Clone o repositório:
 ```
