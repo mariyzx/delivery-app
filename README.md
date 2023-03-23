@@ -17,8 +17,7 @@ O objetivo do TryBeer é agilizar a vida do vendedor e das pessoas que compram s
 
 Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
 
-Consulte **[Instalação](#🔧-instalação)** para saber como rodar o projeto.
-
+Consulte **[Instalação](#install)** para saber como rodar o projeto.
 
 ### 📋 Pré-requisitos
 
@@ -28,7 +27,7 @@ Consulte **[Instalação](#🔧-instalação)** para saber como rodar o projeto.
   ``Node``
   > O projeto espera que sua versão do node seja a 16.
   
-## 🔧 Instalação
+## 🔧 Instalação <a class="install"></a>
 
 Clone o repositório:
 ```
