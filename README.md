@@ -13,6 +13,10 @@ O objetivo do TryBeer é agilizar a vida do vendedor e das pessoas que compram s
 
   É possivel fazer login como pessoa vendedora utilizando o email ``fulana@deliveryapp.com`` e senha ``fulana@123``, pessoa administradora com email ``adm@deliveryapp.com`` e senha ``--adm2@21!!--`` e como consumidor com email ``zebirita@email.com``  e senha ``$#zebirita#$``;
   
+ ## 🖥️ Preview
+ 
+![trybeer](https://github.com/mariyzx/trybeer/assets/69324347/e1d55bd7-e706-4103-b837-a9be946255ce)
+
   ## 🚀 Começando
 
 Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
